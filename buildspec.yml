@@ -6,10 +6,10 @@ phases:
       - echo "Installing Packer"
       - curl -o packer.zip https://releases.hashicorp.com/packer/1.4.4/packer_1.4.4_linux_amd64.zip && unzip packer.zip
       - echo "Validating Packer template"
-      - ./packer validate packer_cis.json
+      - ./packer validate packer_centos7.json
   build:
     commands:
-      - ./packer build -color=false packer_cis.json | tee build.log
+      - ./packer build -color=false packer_centos7.json | tee build.log
   post_build:
     commands:
       - egrep "${AWS_REGION}\:\sami\-" build.log | cut -d' ' -f2 > ami_id.txt
